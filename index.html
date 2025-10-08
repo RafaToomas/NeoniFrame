@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>In-A-Frame Neon Interativo</title>
+
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="frame">
+    <div class="border-rotate"></div>
+
+    
+    <div class="social-links">
+      <a href="#" class="icon active" data-content="GitHub" data-url="https://github.com/RafaToomas">
+        <i class="fab fa-github"></i>
+      </a>
+      <a href="#" class="icon active" data-content="LinkedIn" data-url="https://www.linkedin.com/in/rafatoomas">
+        <i class="fab fa-linkedin"></i>
+      </a>
+      <a href="#" class="icon active" data-content="Instagram" data-url="https://www.instagram.com/rafatomasz/">
+        <i class="fab fa-instagram"></i>
+      </a>
+
+      <!-- Ícones não ativos -->
+      <a href="#" class="icon disabled" data-tooltip="Função desativada pelo desenvolvedor 🔒">
+        <i class="fab fa-youtube"></i>
+      </a>
+      <a href="#" class="icon disabled" data-tooltip="Função desativada pelo desenvolvedor 🔒">
+        <i class="fab fa-facebook"></i>
+      </a>
+      <a href="#" class="icon disabled" data-tooltip="Função desativada pelo desenvolvedor 🔒">
+        <i class="fab fa-x-twitter"></i>
+      </a>
+    </div>
+
+     <div class="display-area">
+      <div class="display-text" id="displayText">Clique em um ícone ativo </div>
+      <iframe id="displayFrame" src="" frameborder="0"></iframe>
+    </div>
+  </div>
+
+  <script>
+    const icons = document.querySelectorAll('.icon.active');
+    const displayText = document.getElementById('displayText');
+    const displayFrame = document.getElementById('displayFrame');
+
+    icons.forEach(icon => {
+      icon.addEventListener('click', (e) => {
+        e.preventDefault();
+        const content = icon.getAttribute('data-content');
+        const url = icon.getAttribute('data-url');
+        const iconHTML = icon.innerHTML;
+
+        // Mostra preview fake
+        displayFrame.style.display = "none";
+        displayText.innerHTML = `
+          <div class="preview">
+            ${iconHTML}
+            <p>${content}</p>
+            <a href="${url}" target="_blank" class="btn">Abrir ${content}</a>
+          </div>
+        `;
+        displayText.classList.add('active');
+      });
+    });
+  </script>
+
+</body>
+</html>
